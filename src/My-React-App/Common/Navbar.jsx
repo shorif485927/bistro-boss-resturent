@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { AuthContext } from '../Context/AuthProvider';
+import useCart from '../Hooks/useCart';
 
 const Navbar = () => {
-
+    const {user,logOut} = useContext(AuthContext);
+    const [cart] = useCart()
          const links = <>
                     <li> <NavLink to='/'>home</NavLink> </li>
                     <li> <NavLink to='/menu' >our menu</NavLink> </li>
+                    <li> <NavLink to='/shop/salad' >our shop</NavLink> </li>
+
+                      {
+                            user ? 
+                             <>
+                                  <button className='btn' onClick={logOut}>log out</button>
+
+                             </> 
+                              : 
+                            <>
+                                      <li> <NavLink to='/login' >Log in </NavLink> </li>
+                                      <li> <NavLink to='/signUp' >Sign Up </NavLink> </li>
+                            </>
+                       }
           </>
 
 
@@ -36,10 +53,13 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Button</a>
+<button className="btn">
+  cart <div className="badge badge-sm badge-secondary">{cart.length} </div>
+</button>
   </div>
 </div>
-    );
+
+    )
 };
 
 export default Navbar;

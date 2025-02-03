@@ -14,11 +14,11 @@ const PopulerMenuitem = () => {
         <section className=' '>
                     <SectionTitle></SectionTitle>
 
-                      <div className='grid grid-cols-2 gap-4 my-14'>
-                          {
-                            populerMenu.map(item => <MenuItem key={item?._id} items={item}></MenuItem>)
-                          }
-                      </div>
+                    <div className='grid grid-cols-2 gap-4 my-14'>
+                                      {
+                                        populerMenu.map(item => <MenuItem key={item?._id} items={item}></MenuItem>)
+                                      }
+                                  </div>
         </section>
     );
 };

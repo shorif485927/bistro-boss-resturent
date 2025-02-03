@@ -1,9 +1,9 @@
 import React from 'react';
-import coverImg from '../../assets/menu/banner3.jpg'
+
 
   
 
-const Cover = () => {
+const Cover = ({coverImg}) => {
     return (
         <div>
             <div

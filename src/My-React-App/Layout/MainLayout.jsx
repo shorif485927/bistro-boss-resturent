@@ -1,11 +1,15 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../Common/Navbar';
 
 const MainLayout = () => {
+         const loacation = useLocation()
+          const currentLocation = loacation.pathname.includes('login') 
+          
+          
     return (
         <div>
-             <Navbar></Navbar>
+            { currentLocation || <Navbar></Navbar>}
             <Outlet></Outlet>
         </div>
     );
