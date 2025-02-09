@@ -1,20 +1,40 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../Context/AuthProvider';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 const SignUp = () => {
-             const {creatUser} = useContext(AuthContext)
+             const {creatUser,updateUserProfile} = useContext(AuthContext);
+             const axiosPublic = useAxiosPublic()
             const handleSignUp = (e) => {
                       e.preventDefault();
                       const formData = e.target;
                       const name = formData.name.value;
+                      const photourl = formData.photourl.value;
                       const email = formData.email.value;
                       const password = formData.password.value;
 
                       creatUser(email,password)
                       .then(result =>{
-                        const registerdUser = result.user;
-                         console.log(registerdUser);
+                      
+                         updateUserProfile(name,photourl)
+                         .then(() => {
+
+                          const userInfo = {
+                            name : name,
+                            email : email
+                          }
                          
+                          axiosPublic.post('/users', userInfo)
+                          .then(res => {
+                             const newUser = res.data;
+                             if(newUser.insertedId){
+                              alert('registerd succesfully')
+                             }
+                          })
+                          .catch(err => console.log(err))
+                            
+                         })
+                         .catch(err => console.log(err))
                       } )
             }
     return (
@@ -39,6 +59,9 @@ const SignUp = () => {
 
                 <label className="fieldset-label">Name</label>
                 <input type="text" name='name' className="input" placeholder="name" />
+
+                <label className="fieldset-label">photo</label>
+                <input type="text" name='photourl' className="input" placeholder="photo url" />
 
 
                 <label className="fieldset-label">Email</label>

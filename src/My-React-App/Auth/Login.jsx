@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../Context/AuthProvider';
+import SocialLogIn from './SocialLogIn';
 
 
 const Login = () => {
@@ -68,10 +69,17 @@ const Login = () => {
             
 
           <button disabled={disable} className="btn btn-neutral mt-4" > Log In</button>
+                      <p className='my-10'>or </p>
+                         
+                      <div> 
+                       <SocialLogIn></SocialLogIn>
+                    </div>
         </fieldset>
 
       </div>
     </form>
+
+                  
   </div>
 </div>
         </div>

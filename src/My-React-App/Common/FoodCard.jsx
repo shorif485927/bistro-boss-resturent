@@ -1,18 +1,22 @@
 import React from "react";
-import UseAuth from "../Hooks/UseAuth";
+import useAuth from "../Hooks/UseAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import useCart from "../Hooks/useCart";
 
 const FoodCard = ({ foodItems }) => {
-  const { user } = UseAuth();
+  const { user } = useAuth();
+   console.log(user);
+   
   const { _id, name, recipe, image, category, price } = foodItems;
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
+  const [,refetch] = useCart()
 
   const handleFoodCart = (food) => {
     const foodCartItems = {
       meuId: _id,
-      email: user.eamil,
+      email: user.email,
       name,
       image,
       price,
@@ -27,6 +31,8 @@ const FoodCard = ({ foodItems }) => {
           showConfirmButton: false,
           timer: 1500,
         });
+        // call refetch to update the cart items  
+        refetch()
       }
     });
   };
